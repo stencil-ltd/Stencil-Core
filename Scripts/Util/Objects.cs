@@ -103,6 +103,13 @@ namespace Util
             return null;
         }
         
+        public static void DestroyChildrenFrom(this Transform transform, int start)
+        {
+            for (var i = start; i < transform.childCount; i++) 
+                Object.Destroy(transform.GetChild(i).gameObject);
+//            transform.DetachChildren();
+        }
+        
         public static void DestroyAllChildren(this Transform transform)
         {
             foreach (var child in transform.GetChildren())
