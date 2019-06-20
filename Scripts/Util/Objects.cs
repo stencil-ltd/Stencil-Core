@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using UI;
 using UnityEngine;
+using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 namespace Util
@@ -108,6 +110,19 @@ namespace Util
             for (var i = start; i < transform.childCount; i++) 
                 Object.Destroy(transform.GetChild(i).gameObject);
 //            transform.DetachChildren();
+        }
+        
+        /**
+         * Does not destroy elements with an ignoring layout element attached.
+         */
+        public static void DestroyLayoutChildren(this Transform transform)
+        {
+            foreach (var child in transform.GetChildren())
+            {
+                var el = child.GetComponent<LayoutElement>();
+                if (el != null && el.ignoreLayout) continue;
+                Object.Destroy(child.gameObject);
+            }
         }
         
         public static void DestroyAllChildren(this Transform transform)
