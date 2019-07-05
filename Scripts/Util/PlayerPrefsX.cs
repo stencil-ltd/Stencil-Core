@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using JetBrains.Annotations;
+using Stencil.Util;
 using UnityEngine;
 
 namespace Util
@@ -73,6 +76,19 @@ namespace Util
         {
             if (value.HasValue)
                 SetLong(key, value.Value.ToBinary());
+            else PlayerPrefs.DeleteKey(key);
+        }
+        
+        public static Dictionary<K,V> GetDictionary<K,V>(string key, [CanBeNull] Dictionary<K,V> defaultValue = null)
+        {
+            var json = PlayerPrefs.GetString(key);
+            return (string.IsNullOrEmpty(json) ? null : Json.Deserialize(json)) as Dictionary<K, V>;
+        }
+
+        public static void SetDictionary<K, V>(string key, [CanBeNull] Dictionary<K, V> value)
+        {
+            if (value != null)
+                PlayerPrefs.SetString(key, Json.Serialize(value));
             else PlayerPrefs.DeleteKey(key);
         }
 
