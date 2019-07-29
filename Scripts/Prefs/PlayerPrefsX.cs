@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Util
 {
+    [Obsolete("Use StencilPrefs. This will eventually be refactored away")]
     public static class PlayerPrefsX
     {
         [Obsolete]
