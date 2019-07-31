@@ -45,7 +45,7 @@ namespace Plugins.Collections
                 if (!Equals(result, default(TResult)))
                     return result;
             }
-            return default;
+            return default(TResult);
         }
     }
 }

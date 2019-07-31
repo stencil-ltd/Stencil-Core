@@ -30,7 +30,6 @@ namespace Plugins.Data
                 obj.SetActive(false);
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();
-            Storage.Prefs.ClearAll();
             OnGlobalReset?.Invoke();
             Scenes.Reload();
         }
