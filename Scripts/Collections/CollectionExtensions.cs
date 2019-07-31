@@ -36,5 +36,16 @@ namespace Plugins.Collections
             if (obj == null) return;
             coll.Add(obj);
         }
+
+        public static TResult FirstNotDefault<T, TResult>(this IEnumerable<T> collection, Func<T, TResult> func)
+        {
+            foreach (var it in collection)
+            {
+                var result = func(it);
+                if (!Equals(result, default(TResult)))
+                    return result;
+            }
+            return default;
+        }
     }
 }
