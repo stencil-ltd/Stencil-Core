@@ -1,10 +1,6 @@
 using System;
 using System.Linq;
-using Analytics;
-using Dev;
 using Dirichlet.Numerics;
-using Scripts.RemoteConfig;
-using UnityEngine;
 
 namespace Scripts.Util
 {
@@ -64,9 +60,6 @@ namespace Scripts.Util
                 strSuffix = "???";
             else if (suffix > Suffix.None)
                 strSuffix = $"{suffix}";
-
-            if (strSuffix == "Ud" && StencilRemote.IsProd()) 
-                Tracking.Report("Running out of numbers");
             
             return $"{amount:N0}{strSuffix}";
         }
