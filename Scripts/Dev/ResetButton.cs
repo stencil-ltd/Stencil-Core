@@ -13,6 +13,8 @@ namespace Plugins.Data
     {
         public static event EventHandler OnGlobalReset;
         public static bool HasReset = false;
+
+        public bool clearScenes;
         
         [Bind] 
         private Button _button;
@@ -20,10 +22,10 @@ namespace Plugins.Data
         private void Awake()
         {
             this.Bind();
-            _button.onClick.AddListener(ResetData);
+            _button.onClick.AddListener(() => ResetData(clearScenes));
         }
 
-        public static void ResetData()
+        public static void ResetData(bool clearScenes = false)
         {
             HasReset = true;
             foreach (var obj in SceneManager.GetActiveScene().GetRootGameObjects())
@@ -31,7 +33,10 @@ namespace Plugins.Data
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();
             OnGlobalReset?.Invoke();
-            Scenes.Reload();
+            if (clearScenes)
+                Scenes.Clear();
+            else
+                Scenes.Reload();
         }
     }
 }

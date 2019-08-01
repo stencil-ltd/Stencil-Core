@@ -11,6 +11,11 @@ namespace Plugins.Util
             Debug.Log($"Reset to Scene: ${scene.name}");
             SceneManager.LoadScene(scene.buildIndex);
         }
-        
+
+        public static void Clear()
+        {
+            Debug.Log($"Clear Scenes");
+            SceneManager.LoadScene(0);
+        }
     }
 }
