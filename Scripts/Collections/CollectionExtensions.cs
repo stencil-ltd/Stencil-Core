@@ -12,6 +12,12 @@ namespace Plugins.Collections
         public static T Front<T>(this Deque<T> deque) => deque.First();
         public static T Back<T>(this Deque<T> deque) => deque.Last();
 
+        public static V GetValueOrDefault<K, V>(this Dictionary<K, V> dict, K key)
+        {
+            var success = dict.TryGetValue(key, out var retval);
+            return !success ? default(V) : retval;
+        }
+
         public static T Random<T>(this IList<T> coll)
         {
             if (coll.Count == 0) return default(T);
