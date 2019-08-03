@@ -79,6 +79,19 @@ namespace Util
                 SetLong(key, value.Value.ToBinary());
             else PlayerPrefs.DeleteKey(key);
         }
+
+        public static TimeSpan? GetTimeSpan(string key, TimeSpan? defaultValue = null)
+        {
+            var binary = GetLong(key);
+            return binary == 0 ? defaultValue : TimeSpan.FromTicks(binary);
+        }
+
+        public static void SetTimeSpan(string key, TimeSpan? value)
+        {
+            if (value.HasValue)
+                SetLong(key, value.Value.Ticks);
+            else PlayerPrefs.DeleteKey(key);
+        }
         
         public static Dictionary<K,V> GetDictionary<K,V>(string key, [CanBeNull] Dictionary<K,V> defaultValue = null)
         {

@@ -81,6 +81,13 @@ namespace Scripts.Prefs
             PlayerPrefsX.SetDateTime(config.Process(key), value);
             return this;
         }
+        
+        public TimeSpan? GetTimeSpan(string key, TimeSpan? defaultValue = null) => PlayerPrefsX.GetTimeSpan(config.Process(key), defaultValue);
+        public StencilPrefs SetTimeSpan(string key, TimeSpan? value)
+        {
+            PlayerPrefsX.SetTimeSpan(config.Process(key), value);
+            return this;
+        }
 
         public Dictionary<K,V> GetDictionary<K,V>(string key, [CanBeNull] Dictionary<K,V> defaultValue = null) => PlayerPrefsX.GetDictionary(config.Process(key), defaultValue);
 
