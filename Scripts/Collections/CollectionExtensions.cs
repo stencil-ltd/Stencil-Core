@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Scripts.Util;
+using UnityEditor.PackageManager;
 
 namespace Plugins.Collections
 {
@@ -52,6 +53,14 @@ namespace Plugins.Collections
                     return result;
             }
             return default(TResult);
+        }
+        
+        public static IEnumerable<TResult> SelectNotDefault<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult> selector)
+        {
+            var thedefault = default(TResult);
+            return source.Select(selector).Where(value => !EqualityComparer<TResult>.Default.Equals(thedefault, value));
         }
     }
 }
