@@ -1,9 +1,7 @@
 {
     "name": "Stencil-Core",
     "references": [
-        "GUID:f51ebe6a0ceec4240a699833d6309b23",
-        "GUID:204ede9a01e5545bca7ca065278e6986",
-        "GUID:284a1529825764e2f823c14320a8204b"
+        "UniRx.Async"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
