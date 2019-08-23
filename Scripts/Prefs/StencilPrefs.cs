@@ -97,6 +97,14 @@ namespace Scripts.Prefs
             return this;
         }
 
+        public T GetJson<T>(string key, T defaultValue = default(T)) => PlayerPrefsX.GetJson<T>(key, defaultValue);
+
+        public StencilPrefs SetJson<T>(string key, T value)
+        {
+            PlayerPrefsX.SetJson(key, value);
+            return this;
+        }
+
         #endregion
     }
 }

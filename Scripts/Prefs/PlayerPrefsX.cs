@@ -106,10 +106,10 @@ namespace Util
             else PlayerPrefs.DeleteKey(key);
         }
 
-        public static T GetJson<T>(string key)
+        public static T GetJson<T>(string key, T defaultValue = default(T))
         {
             var str = PlayerPrefs.GetString(key);
-            if (string.IsNullOrEmpty(str)) return default(T);
+            if (string.IsNullOrEmpty(str)) return defaultValue;
             return JsonUtility.FromJson<T>(str);
         }
 
