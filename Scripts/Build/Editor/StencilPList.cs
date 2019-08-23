@@ -3,10 +3,6 @@ using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
 using System.IO;
 
-#if STENCIL_ADS
-using Ads;
-#endif
-
 [InitializeOnLoad]
 public class StencilPlist
 {
@@ -39,10 +35,6 @@ public class StencilPlist
 //            rootDict.SetBoolean("UIApplicationExitsOnSuspend", false);
             rootDict.values.Remove("UIApplicationExitsOnSuspend");
             rootDict.CreateArray("UIBackgroundModes").AddString("remote-notification");
-            
-            #if STENCIL_ADS
-            rootDict.SetString("GADApplicationIdentifier", AdSettings.Instance.AppId.Ios);
-            #endif
             
             // Write to file
             File.WriteAllText(plistPath, plist.WriteToString());
