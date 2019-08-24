@@ -1,8 +1,5 @@
 {
     "name": "Stencil-Core",
-    "references": [
-        "UniRx.Async"
-    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
