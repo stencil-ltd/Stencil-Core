@@ -1,8 +1,12 @@
 {
-    "name": "Stencil-Core",
-    "references": [],
+    "name": "Numerics.Editor",
+    "references": [
+        "Stencil-Core"
+    ],
     "optionalUnityReferences": [],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
