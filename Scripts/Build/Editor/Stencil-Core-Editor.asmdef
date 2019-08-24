@@ -1,5 +1,5 @@
 {
-    "name": "Stencil-Build-Editor",
+    "name": "Stencil-Core-Editor",
     "references": [
         "Stencil-Core"
     ],
