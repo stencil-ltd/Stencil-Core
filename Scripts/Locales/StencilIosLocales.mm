@@ -33,7 +33,7 @@ extern "C"
     char* __IosGetCountryShort()
     {
         NSLocale *locale = [NSLocale currentLocale];
-        NSString *code = [locale objectForKey: NSLocaleCountryCode];
+        NSString *code = locale.countryCode;
         return cStringCopy([code UTF8String]);
     }
     
@@ -41,7 +41,7 @@ extern "C"
     {
         NSLocale *locale = [NSLocale currentLocale];
         NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-        NSString *code = [locale objectForKey: NSLocaleCountryCode];
+        NSString *code = locale.countryCode;
         NSString *name = [usLocale displayNameForKey: NSLocaleCountryCode value: code];
         return cStringCopy([name UTF8String]);
     }
