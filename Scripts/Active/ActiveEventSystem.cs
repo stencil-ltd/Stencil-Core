@@ -39,7 +39,7 @@ namespace State.Active
                 {
                     try
                     {
-                        if (!res.Registered)
+                        if (!res.Registered || res.Unregistered)
                         {
                             res.Register();
                             registered.Add(res);
