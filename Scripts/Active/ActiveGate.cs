@@ -7,7 +7,7 @@ namespace State.Active
     {
         public ActiveManager ActiveManager { get; private set; }
 
-        [Tooltip("If this returns false, it will supersede all other gates.")]
+        [Tooltip("This flag causes a false check to supersede all other gates.")]
         public bool Veto = false;
 
         public abstract bool? Check();
