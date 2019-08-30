@@ -52,7 +52,7 @@ namespace State.Active
 
         public override void Register()
         {
-            if (Registered) return;
+            if (Registered && !Unregistered) return;
             if (!Application.isPlaying && !ActiveInEditor) return;
             Gates.AddRange(GetComponents<ActiveGate>());
             foreach(var g in Gates) g.Register(this);
