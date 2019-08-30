@@ -14,6 +14,7 @@ namespace Plugins.Collections
 
         public static V GetValueOrDefault<K, V>(this Dictionary<K, V> dict, K key)
         {
+            if (key == null) return default;
             var success = dict.TryGetValue(key, out var retval);
             return !success ? default(V) : retval;
         }
