@@ -10,7 +10,7 @@ namespace Scripts.Build.Editor
 {
     public class SwiftSupport
     {
-        public static bool shouldRun = false;
+        public static bool shouldRun = true;
         public static string swiftVersion = "5.0";
         
         // From https://github.com/googlesamples/unity-jar-resolver/blob/master/source/IOSResolver/src/IOSResolver.cs#L1404
