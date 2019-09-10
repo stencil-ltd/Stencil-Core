@@ -21,7 +21,7 @@ namespace Plugins.Collections
 
         public static T Random<T>(this IList<T> coll)
         {
-            if (coll.Count == 0) return default(T);
+            if (coll.Count == 0) return default;
             var idx = StencilRandom.Range(0, coll.Count);
             return coll[idx];
         }
