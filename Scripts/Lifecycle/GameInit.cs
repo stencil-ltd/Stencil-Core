@@ -65,12 +65,5 @@ namespace Init
 
         protected virtual void OnNewScene(Scene arg0, LoadSceneMode loadSceneMode)
         {}
-
-        protected virtual IEnumerator Start()
-        {
-            Started = true;
-            OnSettled();
-            yield break;
-        }
     }
 }
