@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Maths;
 using Scripts.Util;
 
 namespace Plugins.Collections
@@ -24,6 +25,22 @@ namespace Plugins.Collections
             if (coll.Count == 0) return default;
             var idx = StencilRandom.Range(0, coll.Count);
             return coll[idx];
+        }
+        
+        public static List<T> Random<T>(this IList<T> coll, int count)
+        {
+            var idxs = new List<int>();
+            for (var i = 0; i < coll.Count; i++) 
+                idxs.Add(i);
+            var retval = new List<T>();
+            count = count.AtMost(coll.Count);
+            for (var i = 0; i < count; i++)
+            {
+                var idx = StencilRandom.Range(0, idxs.Count);
+                retval.Add(coll[idxs[idx]]);
+                idxs.RemoveAt(idx);
+            }
+            return retval; 
         }
         
         public static void Shuffle<T>(this IList<T> list)  
