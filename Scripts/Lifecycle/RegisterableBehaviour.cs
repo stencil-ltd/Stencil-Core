@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace UI
 {
     public abstract class RegisterableBehaviour : MonoBehaviour
     {
-        [HideInInspector]
+        [NonSerialized]
         public bool Registered;
-        [HideInInspector]
+        [NonSerialized]
         public bool Unregistered;
         
         public virtual void Register() {}
