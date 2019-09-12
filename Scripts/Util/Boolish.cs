@@ -5,7 +5,7 @@ namespace Scripts.Util
     [Serializable]
     public enum Boolish
     {
-        Undefined,
+        Unspecified,
         True,
         False
     }
