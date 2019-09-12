@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Scripts.Extensions.LeanTween;
 using Scripts.Util;
 using UI;
+using UniRx.Async;
 using UnityEngine;
 using Util;
 using Util.Coroutines;
@@ -106,13 +108,13 @@ namespace State.Active
                         break;
                 }
             }
-            if (hasActive)
-                Objects.StartCoroutine(SetActiveInternal(active));
+            if (hasActive) 
+                SetActiveInternal(active);
         }
 
-        private IEnumerator SetActiveInternal(bool active)
+        private async void SetActiveInternal(bool active)
         {
-            if (active == gameObject.activeSelf) yield break;
+            if (active == gameObject.activeSelf) return;
             if (!active && !string.IsNullOrEmpty(ExitTrigger))
             {
                 if (!string.IsNullOrEmpty(ExitTrigger))
@@ -121,12 +123,13 @@ namespace State.Active
                     if (anim != null)
                     {
                         anim.SetTrigger(ExitTrigger);
-                        yield return anim.Await(0.1f);
+                        await anim.AwaitTask(0.1f);
                     }
                 } else if (FadeExitDuration > 0f)
                 {
-                    yield return new WaitForTween(LeanTween.alphaCanvas(GetComponent<CanvasGroup>(), 0f,
-                        FadeExitDuration));
+                    await LeanTween
+                        .alphaCanvas(GetComponent<CanvasGroup>(), 0f, FadeExitDuration)
+                        .Await();
                 }
             }
             MaybeLog($"SetActiveInternal set active {active}");
