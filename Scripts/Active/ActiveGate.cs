@@ -7,8 +7,10 @@ namespace State.Active
     {
         public ActiveManager ActiveManager { get; private set; }
 
+        [Header("Active Gate")]
         [Tooltip("This flag causes a false check to supersede all other gates.")]
         public bool Veto = false;
+        public bool Inverted = false;
 
         public abstract bool? Check();
         public virtual void Register(ActiveManager manager) 
