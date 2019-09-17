@@ -1,4 +1,5 @@
 using System.Collections;
+using Scripts.Maths;
 using UniRx.Async;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ namespace Scripts.Util
             var duration = anim.GetCurrentAnimatorStateInfo(0).length;
             var norm = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
             Debug.Log($"Animator awaiting {duration} - {leadTime} [norm: {norm}]");
-            await UniTask.Delay((int) (1000 * (duration - leadTime)));
+            await UniTask.Delay((int) (1000 * (duration - leadTime).AtLeast(0)));
             Debug.Log($"Animator await finished");
         }
     }
