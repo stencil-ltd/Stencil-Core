@@ -8,6 +8,12 @@ using UnityEngine;
 
 public class BuildScript : IPreprocessBuildWithReport {
 
+    [MenuItem("Stencil/Save Assets")]
+    public static void SaveAssets()
+    {
+        AssetDatabase.SaveAssets();
+    }
+    
     [MenuItem("Stencil/Production/Both")]
     public static void ProductionBuild()
     {
