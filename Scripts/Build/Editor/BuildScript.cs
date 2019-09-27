@@ -113,11 +113,21 @@ public class BuildScript : IPreprocessBuildWithReport {
         var path = $"Builds/{target}";
         var dir = $"{Application.dataPath}/../";
         var abspath = dir + path;
-        if (Directory.Exists(abspath))
-            Directory.Delete(abspath, true);
-//        var dev = EditorUserBuildSettings.development ? BuildOptions.Development : BuildOptions.None;
-        var dev = BuildOptions.None;
-        BuildPipeline.BuildPlayer(levels, path, target, dev);
+        if (target == BuildTarget.iOS)
+        {
+            if (Directory.Exists(abspath))
+                Directory.Delete(abspath, true);
+        } else if (target == BuildTarget.Android)
+        {
+            var artifact = abspath + ".aab";
+            if (File.Exists(artifact))
+                File.Delete(artifact);
+        }
+            
+        else if (File.Exists(abspath))
+            File.Delete(abspath);
+        var options = BuildOptions.ShowBuiltPlayer;
+        BuildPipeline.BuildPlayer(levels, path, target, options);
     }
 
     public int callbackOrder => 0;
