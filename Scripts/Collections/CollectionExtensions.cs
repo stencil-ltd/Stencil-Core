@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Scripts.Maths;
 using Scripts.Util;
+using UnityEngine;
+using Random = System.Random;
 
 namespace Plugins.Collections
 {
@@ -78,6 +81,15 @@ namespace Plugins.Collections
         {
             var thedefault = default(TResult);
             return source.Select(selector).Where(value => !EqualityComparer<TResult>.Default.Equals(thedefault, value));
+        }
+
+        public static void SetActive(this IEnumerable<GameObject> coll, bool active)
+        {
+            foreach (var gameObject in coll)
+            {
+                if (gameObject == null) continue;
+                gameObject.SetActive(active);
+            }
         }
     }
 }
