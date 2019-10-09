@@ -1,10 +1,17 @@
 using System;
 using Dirichlet.Numerics;
+using UnityEngine;
 
 namespace Scripts.Maths
 {
     public static class MathExtensions
     {
+        public static int Clamp(this int value, int min, int max)
+            => Mathf.Clamp(value, min, max);
+        
+        public static float Clamp(this float value, float min, float max)
+            => Mathf.Clamp(value, min, max);
+        
         public static int AtLeast(this int value, int constraint)
             => Math.Max(value, constraint);
         public static uint AtLeast(this uint value, uint constraint)
