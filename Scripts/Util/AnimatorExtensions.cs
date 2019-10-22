@@ -23,6 +23,7 @@ namespace Scripts.Util
         public static async UniTask AwaitTask(this Animator anim, float leadTime = 0f)
         {
             await UniTask.DelayFrame(1);
+            if (anim == null) return;
             var duration = anim.GetCurrentAnimatorStateInfo(0).length;
             var norm = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
             Debug.Log($"Animator awaiting {duration} - {leadTime} [norm: {norm}]");
