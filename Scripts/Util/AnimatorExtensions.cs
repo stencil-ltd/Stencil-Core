@@ -13,6 +13,7 @@ namespace Scripts.Util
         public static IEnumerator Await(this Animator anim, float leadTime = 0f)
         {
             yield return null;
+            if (anim == null) yield break;
             var duration = anim.GetCurrentAnimatorStateInfo(0).length;
             var norm = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
             Debug.Log($"Animator awaiting {duration} - {leadTime} [norm: {norm}]");
