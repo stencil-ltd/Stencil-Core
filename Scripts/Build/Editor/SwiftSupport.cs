@@ -19,38 +19,34 @@ namespace Scripts.Build.Editor
         [PostProcessBuild(BUILD_ORDER_INSTALL_PODS+1), UsedImplicitly]
         public static void OnPostProcess(BuildTarget target, string path)
         {
-#if UNITY_IOS
-            if (target == BuildTarget.iOS)
+            if (target != BuildTarget.iOS) return;
+            // XCProj
+            string projPath = PBXProject.GetPBXProjectPath(path);
+
+            PBXProject proj = new PBXProject();
+            proj.ReadFromString(File.ReadAllText(projPath));
+
+            string targetName = PBXProject.GetUnityTargetName();
+            string projectTarget = proj.TargetGuidByName(targetName);
+                
+            proj.AddBuildProperty(projectTarget, "SWIFT_VERSION", swiftVersion);
+            File.WriteAllText(projPath, proj.WriteToString());
+                
+            // Podfile
+            var podfile = $"{path}/Podfile";
+            if (!File.Exists(podfile))
             {
-                // XCProj
-                string projPath = PBXProject.GetPBXProjectPath(path);
-
-                PBXProject proj = new PBXProject();
-                proj.ReadFromString(File.ReadAllText(projPath));
-
-                string targetName = PBXProject.GetUnityTargetName();
-                string projectTarget = proj.TargetGuidByName(targetName);
-                
-                proj.AddBuildProperty(projectTarget, "SWIFT_VERSION", swiftVersion);
-                File.WriteAllText(projPath, proj.WriteToString());
-                
-                // Podfile
-                var podfile = $"{path}/Podfile";
-                if (!File.Exists(podfile))
-                {
-                    Debug.LogError($"No podfile found at {podfile}. Creating Empty one.");
-                    return;
-                }
-                
-                Debug.Log($"Podfile found at {podfile}. Adding use_frameworks!");
-                var lines = File.ReadAllLines(podfile).ToList();
-                lines.Insert(0, "use_frameworks!");
-                File.WriteAllLines(podfile, lines);
-                
-                // Unfortunately we have to re-run the install. This sucks.
-                IOSResolver.OnPostProcessInstallPods(target, path);
+                Debug.LogError($"No podfile found at {podfile}. Creating Empty one.");
+                return;
             }
-#endif
+                
+            Debug.Log($"Podfile found at {podfile}. Adding use_frameworks!");
+            var lines = File.ReadAllLines(podfile).ToList();
+            lines.Insert(0, "use_frameworks!");
+            File.WriteAllLines(podfile, lines);
+                
+            // Unfortunately we have to re-run the install. This sucks.
+            IOSResolver.OnPostProcessInstallPods(target, path);
         }
     }
 }
