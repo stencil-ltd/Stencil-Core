@@ -112,20 +112,10 @@ public class BuildScript : IPreprocessBuildWithReport {
         var levels = EditorBuildSettings.scenes.ToArray();
         var path = $"Builds/{target}";
         var dir = $"{Application.dataPath}/../";
+        if (target == BuildTarget.Android) path += ".aab";
         var abspath = dir + path;
-        if (target == BuildTarget.iOS)
-        {
-            if (Directory.Exists(abspath))
-                Directory.Delete(abspath, true);
-        } else if (target == BuildTarget.Android)
-        {
-            var artifact = abspath + ".aab";
-            if (File.Exists(artifact))
-                File.Delete(artifact);
-        }
-            
-        else if (File.Exists(abspath))
-            File.Delete(abspath);
+        if (File.Exists(abspath)) File.Delete(abspath);
+        else if (Directory.Exists(abspath)) Directory.Delete(abspath, true);
         var options = BuildOptions.ShowBuiltPlayer;
         BuildPipeline.BuildPlayer(levels, path, target, options);
     }
