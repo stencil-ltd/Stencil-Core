@@ -29,6 +29,7 @@ namespace Scripts.Build.Editor
             string targetName = PBXProject.GetUnityTargetName();
             string projectTarget = proj.TargetGuidByName(targetName);
                 
+            proj.AddBuildProperty(projectTarget, "SWIFT_OBJC_BRIDGING_HEADER", "Libraries/Platform/iOS/Unity-iPhone-Bridging-Header.h");
             proj.AddBuildProperty(projectTarget, "SWIFT_VERSION", swiftVersion);
             File.WriteAllText(projPath, proj.WriteToString());
                 
