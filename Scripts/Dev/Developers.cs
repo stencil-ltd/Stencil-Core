@@ -4,6 +4,7 @@ namespace Dev
 {
     public static class Developers
     {
-        public static bool Enabled => Application.isEditor || Debug.isDebugBuild;
+        public static bool? Force = null;
+        public static bool Enabled => Force ?? (Application.isEditor || Debug.isDebugBuild);
     }
 }
