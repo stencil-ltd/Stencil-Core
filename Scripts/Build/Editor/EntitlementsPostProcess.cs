@@ -27,8 +27,7 @@ public class EntitlementsPostProcess
         var proj = new PBXProject();
         proj.ReadFromFile(proj_path);
 
-        // target_name = "Unity-iPhone"
-        var target_name = PBXProject.GetUnityTargetName();
+        var target_name = "Unity-iPhone";
         var target_guid = proj.TargetGuidByName(target_name);        
         var dst = buildPath + "/" + target_name + "/" + file_name;
         try

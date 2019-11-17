@@ -1,11 +1,14 @@
+#if !EXCLUDE_RESOLVER
+
 using System.IO;
 using System.Linq;
-using Google;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
 using UnityEngine;
+
+using Google;
 
 namespace Scripts.Build.Editor
 {
@@ -26,7 +29,7 @@ namespace Scripts.Build.Editor
             PBXProject proj = new PBXProject();
             proj.ReadFromString(File.ReadAllText(projPath));
 
-            string targetName = PBXProject.GetUnityTargetName();
+            string targetName = "Unity-iPhone";
             string projectTarget = proj.TargetGuidByName(targetName);
                 
             proj.AddBuildProperty(projectTarget, "SWIFT_OBJC_BRIDGING_HEADER", "Libraries/Platform/iOS/Unity-iPhone-Bridging-Header.h");
@@ -48,6 +51,9 @@ namespace Scripts.Build.Editor
                 
             // Unfortunately we have to re-run the install. This sucks.
             IOSResolver.OnPostProcessInstallPods(target, path);
+
         }
     }
 }
+
+#endif
