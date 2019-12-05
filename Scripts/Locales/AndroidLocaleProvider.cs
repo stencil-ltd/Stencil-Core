@@ -13,7 +13,7 @@ namespace Scripts.Locales
 
         public AndroidLocaleProvider()
         {
-            cls = new AndroidJavaClass("java.util.Locale");
+            cls = new AndroidJavaClass("java/util/Locale");
             locale = cls.CallStatic<AndroidJavaObject>("getDefault");
         }
 
