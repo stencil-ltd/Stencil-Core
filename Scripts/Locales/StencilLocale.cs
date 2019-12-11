@@ -5,10 +5,13 @@ namespace Scripts.Locales
 {
     public static class StencilLocale
     {
+        private static bool _init;
         private static ILocaleProvider _provider = new DummyLocaleProvider();
         
         public static void Init()
         {
+            if (_init) return;
+            _init = true;
             Debug.Log($"Initializing StencilLocale...");
 #if !UNITY_EDITOR
                 #if UNITY_ANDROID
