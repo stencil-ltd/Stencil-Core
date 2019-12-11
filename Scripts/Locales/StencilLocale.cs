@@ -1,3 +1,4 @@
+using UnityEngine;
 using Util;
 
 namespace Scripts.Locales
@@ -6,15 +7,17 @@ namespace Scripts.Locales
     {
         private static ILocaleProvider _provider = new DummyLocaleProvider();
         
-        static StencilLocale()
+        public static void Init()
         {
-            #if !UNITY_EDITOR
+            Debug.Log($"Initializing StencilLocale...");
+#if !UNITY_EDITOR
                 #if UNITY_ANDROID
                     _provider = new AndroidLocaleProvider();
                 #elif UNITY_IOS
                     _provider = new IosLocaleProvider();
                 #endif
-            #endif
+#endif
+            Debug.Log($"StencilLocale Initialized!");
         }
 
         public static string GetLocaleString()

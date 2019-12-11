@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Scripts.Lifecycle;
+using Scripts.Locales;
 using Scripts.Prefs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -36,6 +37,7 @@ namespace Init
             Application.targetFrameRate = 60;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             Screen.orientation = ScreenOrientation.Portrait;
+            StencilLocale.Init();
             new GameObject("Main Thread Dispatch").AddComponent<UnityMainThreadDispatcher>();
             SceneManager.sceneLoaded += _OnNewScene;
             StartCoroutine(SetupLocation());
