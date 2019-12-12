@@ -26,7 +26,7 @@ return input;
 }
 
 + (BOOL) hasPermission:(Permission) permission {
-    
+    return NO;
 }
 
 + (void) requestPermission:(Permission) permission {
@@ -38,11 +38,10 @@ return input;
 extern "C"
 {
     bool __IosHasPermission(char* permission) {
-        NSString * perm = [NSString stringWithUTF8String:permission];
-        
+        return NO;        
     }
     
     void __IosRequestPermission(char* permission) {
-        NSString * perm = [NSString stringWithUTF8String:permission];
+        
     }
 }
