@@ -1,4 +1,4 @@
-namespace UnityEngine
+namespace Stencil.Permissions
 {
     public interface IPermissions
     {

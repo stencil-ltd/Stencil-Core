@@ -1,4 +1,4 @@
-namespace UnityEngine
+namespace Stencil.Permissions
 {
     public class IosPermissions : IPermissions
     {

@@ -1,5 +1,8 @@
-namespace UnityEngine
+using System;
+
+namespace Stencil.Permissions
 {
+    [Serializable]
     public enum Permission
     {
         Camera,

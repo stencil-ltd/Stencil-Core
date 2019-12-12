@@ -1,15 +1,17 @@
-using System;
+#if UNITY_ANDROID
+
 using System.Collections.Generic;
 using Plugins.Collections;
+using UnityEngine;
 
-namespace UnityEngine
+namespace Stencil.Permissions
 {
     public class AndroidPermissions : IPermissions
     {
         private static readonly Dictionary<Permission, string> NativeMap = new Dictionary<Permission, string>
         {
-            { Permission.Camera, Android.Permission.Camera },
-            { Permission.Microphone, Android.Permission.Microphone },
+            { Permission.Camera, UnityEngine.Android.Permission.Camera },
+            { Permission.Microphone, UnityEngine.Android.Permission.Microphone },
             { Permission.Contacts, "android.permission.READ_CONTACTS" },
             { Permission.Voice, "android.permission.RECORD_AUDIO" },
         };
@@ -22,7 +24,7 @@ namespace UnityEngine
         {
             var str = NativeMap.GetValueOrDefault(permission);
             if (str != null)
-                return Android.Permission.HasUserAuthorizedPermission(str);
+                return UnityEngine.Android.Permission.HasUserAuthorizedPermission(str);
             return true;
         }
 
@@ -30,7 +32,9 @@ namespace UnityEngine
         {
             if (HasPermission(permission)) return;
             var str = NativeMap.GetValueOrDefault(permission);
-            if (str != null) Android.Permission.RequestUserPermission(str);
+            if (str != null) UnityEngine.Android.Permission.RequestUserPermission(str);
         }
     }
 }
+
+#endif

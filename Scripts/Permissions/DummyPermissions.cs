@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Plugins.Collections;
 using Scripts.Prefs;
 
-namespace UnityEngine
+namespace Stencil.Permissions
 {
     public class DummyPermissions : IPermissions
     {
