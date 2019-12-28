@@ -1,4 +1,4 @@
-#if !EXCLUDE_RESOLVER
+#if STENCIL_SWIFT
 
 using System.IO;
 using System.Linq;
